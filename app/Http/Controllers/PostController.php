@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\StorePostRequest;
 class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        // $posts = Post::all();
+       // $posts = Post::paginate(10);
+       if (request('search')) {
+        $posts = Post::where('title', 'like', '%' . request('search') . '%')->paginate(10);
+         } else {
+        $posts = Post::paginate(10);
+         }
+        
         return view('posts.index', compact('posts'));
     }
 
@@ -18,11 +26,13 @@ class PostController extends Controller
         return view('posts.create');
     }
 
+    
+   
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required',
-            'body' => 'required',
+           // 'body' => 'required',
         ]);
 
         Post::create($request->all());

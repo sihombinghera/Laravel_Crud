@@ -19,11 +19,11 @@
         @method('PUT')
         <div>
             <label for="title">Title:</label>
-            <input type="text" id="title" name="title" value="{{ $post->title }}">
+            <input type="text" class="form-control" id="title" name="title" value="{{ $post->title }}">
         </div>
         <div>
             <label for="body">Body:</label>
-            <textarea id="body" name="body">{{ $post->body }}</textarea>
+            <textarea id="body" class="form-control" name="body">{{ $post->body }}</textarea>
         </div>
         <button type="submit">Update</button>
     </form>
